@@ -1,0 +1,37 @@
+name: Test Formula
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test astrofetch formula on macOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout tap
+        uses: actions/checkout@v5
+
+      - name: Show Homebrew environment
+        run: |
+          brew --version
+          brew config
+
+      - name: Install formula from local tap
+        run: |
+          brew install --build-bottle ./Formula/astrofetch.rb
+
+      - name: Run astrofetch
+        run: |
+          astrofetch --version
+          astrofetch --compact
+
+      - name: Run formula test
+        run: |
+          brew test ./Formula/astrofetch.rb
+
+      - name: Audit formula
+        run: |
+          brew audit --formula ./Formula/astrofetch.rb
