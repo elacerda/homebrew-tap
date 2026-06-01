@@ -1,7 +1,6 @@
 class Astrofetch < Formula
   desc "Terminal fetch app with procedural astrophysical ASCII art"
   homepage "https://github.com/elacerda/astrofetch"
-  version "0.2.8"
   license "MIT"
 
   on_macos do
