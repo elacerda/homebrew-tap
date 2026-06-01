@@ -19,9 +19,14 @@ jobs:
           brew --version
           brew config
 
-      - name: Install formula from local tap
+      - name: Register local tap
         run: |
-          brew install --build-bottle ./Formula/astrofetch.rb
+          brew tap elacerda/tap "$GITHUB_WORKSPACE"
+          brew tap
+
+      - name: Install formula from tap
+        run: |
+          brew install elacerda/tap/astrofetch
 
       - name: Run astrofetch
         run: |
@@ -30,8 +35,8 @@ jobs:
 
       - name: Run formula test
         run: |
-          brew test ./Formula/astrofetch.rb
+          brew test elacerda/tap/astrofetch
 
       - name: Audit formula
         run: |
-          brew audit --formula ./Formula/astrofetch.rb
+          brew audit --formula elacerda/tap/astrofetch
